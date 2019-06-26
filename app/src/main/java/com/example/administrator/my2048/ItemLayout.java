@@ -25,6 +25,22 @@ public class ItemLayout extends RelativeLayout {
     private boolean isMove = true;
     private int myScore = 0;
 
+    public Item2048[] getItem2048s() {
+        return item2048s;
+    }
+
+    public void setItem2048s(Item2048[] item2048s) {
+        this.item2048s = item2048s;
+    }
+
+    public int getMyScore() {
+        return myScore;
+    }
+
+    public void setMyScore(int myScore) {
+        this.myScore = myScore;
+    }
+
     public ItemLayout(Context context) {
         this(context,null,0);
     }
@@ -207,15 +223,17 @@ public class ItemLayout extends RelativeLayout {
     }
 
     //产生随机数字
-    private void generateNum(){
+    public void generateNum(){
         if(checkOver()){ // checkOver() 检查游戏是否结束
             if(myItem2048Listener != null){
+                myItem2048Listener.onTopScore(myScore);
                 myItem2048Listener.onGameOver();
             }
             return;
         }
         if(isSuccess()){// checkOver() 检查游戏是否成功
             if(myItem2048Listener != null){
+                myItem2048Listener.onTopScore(myScore);
                 myItem2048Listener.onGameSuccessfull();
             }
             return;
@@ -296,6 +314,7 @@ public class ItemLayout extends RelativeLayout {
      void onScoreChange(int score);
      void onGameOver();
      void onGameSuccessfull();
+     void onTopScore(int score);
     }
     public void setMy2048Listener(My2048Listener my2048Listener){
         this.myItem2048Listener = my2048Listener;

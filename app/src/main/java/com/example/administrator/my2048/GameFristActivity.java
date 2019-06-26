@@ -1,49 +1,48 @@
 package com.example.administrator.my2048;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import java.util.Random;
 
-public class GameActivity extends AppCompatActivity implements ItemLayout.My2048Listener {
+public class GameFristActivity extends AppCompatActivity implements ItemLayout.My2048Listener {
 
     private ItemLayout itemLayout;
     private TextView myScore;
-    private ImageButton imageButtonBack;
-    private ImageButton imageButtonClear;
+    private ImageButton imageButtonRefresh;
     private ImageButton imageButtonQuestion;
+    private Item2048[] item2048s ;
+    private TextView topScoreview;
+    private TopScore topScore;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game);
+        setContentView(R.layout.activity_game_frist);
+        topScore = new TopScore(this);
         myScore = (TextView) findViewById(R.id.total_score_title);
+        topScoreview = (TextView)findViewById(R.id.top_score);
+        topScoreview.setText("历史记录："+topScore.getTopScore()); //数据存储,闪退，，，忘记实例化，
         itemLayout = (ItemLayout) findViewById(R.id.item_layout);
         itemLayout.setMy2048Listener(this);
 
-        imageButtonBack = (ImageButton) findViewById(R.id.back);
-        imageButtonClear = (ImageButton)findViewById(R.id.clear);
+        imageButtonRefresh = (ImageButton) findViewById(R.id.refresh);
         imageButtonQuestion = (ImageButton)findViewById(R.id.question);
-
-        imageButtonBack.setOnClickListener(new View.OnClickListener() {
+        imageButtonRefresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(GameActivity.this,EntryActivity.class);
-                startActivity(intent);
-                Log.d("back", "onClick: 返回上一步");
-            }
-        });
-
-        imageButtonClear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("clear","onClick:刷新");
+                item2048s = itemLayout.getItem2048s();
+                for(int i = 0 ; i < 16 ; i++){
+                    item2048s[i].setNumber(0);
+                }
+                Random random = new Random();
+                int randonIndex = random.nextInt(16);
+                Item2048 item2048 = item2048s[randonIndex];
+                item2048.setNumber(Math.random()>0.5?4:2);
             }
         });
 
@@ -51,7 +50,7 @@ public class GameActivity extends AppCompatActivity implements ItemLayout.My2048
         imageButtonQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              AlertDialog.Builder dialog = new AlertDialog.Builder(GameActivity.this);
+              AlertDialog.Builder dialog = new AlertDialog.Builder(GameFristActivity.this);
               dialog.setTitle("游戏说明");
               dialog.setMessage("根据上下左右手势移动小方格，当遇到相邻小方格的数字在手势方向上相等时，则合并，直至出现2048游戏"+
                       "成功结束，若所有小方格均有数字且无2048，则游戏失败");
@@ -91,5 +90,10 @@ public class GameActivity extends AppCompatActivity implements ItemLayout.My2048
                         finish();
                     }
                 }).show();
+    }
+    public void onTopScore(int score){
+        if(topScore.getTopScore() < score){
+            topScore.setTopScore(score);
+        }
     }
 }

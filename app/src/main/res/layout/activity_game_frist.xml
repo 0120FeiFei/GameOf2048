@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.administrator.my2048.GameActivity"
+    tools:context="com.example.administrator.my2048.GameFristActivity"
     android:orientation="vertical"
     android:background="@color/colorBackgroundItemLayout">
     <RelativeLayout
@@ -15,7 +15,7 @@
             android:id="@+id/title_name_02"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/title_name"
+            android:text="@string/two_zore_four_eight_game"
             android:textSize="60px"
             android:textStyle="bold"
             android:textColor="@color/colorTitleName"/>
@@ -35,20 +35,20 @@
         android:layout_marginTop="30px">
 
         <ImageButton
-            android:id="@+id/back"
+            android:id="@+id/refresh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20px"
             android:src="@drawable/l_back"
             android:background="@color/colorBackgroundItemLayout"/>
-
-        <ImageButton
-            android:id="@+id/clear"
+        <TextView
+            android:id="@+id/top_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/l_delete"
-            android:layout_marginLeft="150px"
-            android:background="@color/colorBackgroundItemLayout"/>
+            android:layout_centerInParent="true"
+            android:textStyle="bold"
+            android:textSize="60px"
+            android:textColor="@color/colorPrimary"/>
 
         <ImageButton
             android:id="@+id/question"

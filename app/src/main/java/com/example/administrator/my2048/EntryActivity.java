@@ -12,15 +12,22 @@ public class EntryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entry);
-        //开始新游戏
-        Button new_game_btn = (Button)findViewById(R.id.new_game_btn01);
-        new_game_btn.setOnClickListener(new View.OnClickListener() {
+        //开始2048游戏
+        Button frist_game_btn = (Button)findViewById(R.id.frist_game_btn01);
+        frist_game_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(EntryActivity.this,GameActivity.class);
+                Intent intent = new Intent(EntryActivity.this,GameFristActivity.class);
                 startActivity(intent);
-
-                //刷新
+            }
+        });
+        //开始24点
+        Button second_game_btn = (Button)findViewById(R.id.second_game_btn02);
+        second_game_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EntryActivity.this,GameSecondActivity.class);
+                startActivity(intent);
             }
         });
     }

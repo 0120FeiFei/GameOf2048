@@ -16,21 +16,30 @@
     android:layout_centerHorizontal="true"
     android:layout_marginTop="50px"/>
     <Button
-        android:id="@+id/new_game_btn01"
+        android:id="@+id/frist_game_btn01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/new_game"
+        android:text="@string/frist_game"
         android:textSize="45px"
         android:textStyle="bold"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="300px"/>
     <Button
-        android:id="@+id/continue_game_btn02"
+        android:id="@+id/second_game_btn02"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/continue_game"
+        android:text="@string/second_game"
         android:textSize="45px"
         android:textStyle="bold"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="450px"/>
+    <Button
+        android:id="@+id/thrid_game_btn03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/thrid_game"
+        android:textSize="45px"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="600px"/>
 </RelativeLayout>
