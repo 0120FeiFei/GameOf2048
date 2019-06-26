@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">My2048</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_name">2048小游戏</string>
+    <string name="new_game">新游戏</string>
+    <string name="continue_game">继 续</string>
+</resources>

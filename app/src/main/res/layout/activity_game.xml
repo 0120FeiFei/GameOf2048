@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.administrator.my2048.GameActivity"
+    android:orientation="vertical"
+    android:background="@color/colorBackgroundItemLayout">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/title_name_02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_name"
+            android:textSize="60px"
+            android:textStyle="bold"
+            android:textColor="@color/colorTitleName"/>
+        <TextView
+            android:id="@+id/total_score_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="60px"
+            android:textColor="@color/colorTotalScore"
+            android:textStyle="bold"
+            android:layout_marginLeft="600px"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30px">
+
+        <ImageButton
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20px"
+            android:src="@drawable/l_back"
+            android:background="@color/colorBackgroundItemLayout"/>
+
+        <ImageButton
+            android:id="@+id/clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/l_delete"
+            android:layout_marginLeft="150px"
+            android:background="@color/colorBackgroundItemLayout"/>
+
+        <ImageButton
+            android:id="@+id/question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/l_question"
+            android:layout_marginLeft="950px"
+            android:background="@color/colorBackgroundItemLayout"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_marginTop="30px"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="30px">
+        <com.example.administrator.my2048.ItemLayout
+            android:id="@+id/item_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:background="@color/colorBackgroundItemLayout"
+            android:padding="10dp">
+        </com.example.administrator.my2048.ItemLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>
