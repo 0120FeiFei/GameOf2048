@@ -1,5 +1,6 @@
 package com.example.administrator.my2048;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
@@ -9,14 +10,9 @@ import android.widget.RelativeLayout;
 import java.util.ArrayList;
 import java.util.Random;
 
-/**
- * Created by Administrator on 2019/4/8.
- */
-
 public class ItemLayout extends RelativeLayout {
     public int numItemCol = 4; //numItemCol*numItemCol小方格
     private int mPadding; //页内边距
-    private int mMargin = 10; //小方格之间的距离
     private  Item2048[] item2048s = null; //小方格矩阵
     private boolean flag = true; //绘制界面标志，只绘制一次界面
     private My2048Listener  myItem2048Listener;
@@ -60,7 +56,8 @@ public class ItemLayout extends RelativeLayout {
     public void onMeasure(int widthMeasureSpec,int heightMeasureSpec){
         super.onMeasure(widthMeasureSpec,heightMeasureSpec);
         int length = Math.min(getMeasuredHeight(),getMeasuredWidth());
-        int ItemWidth = (length - mPadding*2 - mMargin*(numItemCol-1))/numItemCol;
+        int mMargin = 10;
+        int ItemWidth = (length - mPadding*2 - mMargin *(numItemCol-1))/numItemCol;
         if(flag){
             if(item2048s == null){
                 item2048s = new Item2048[numItemCol*numItemCol];//生成大小为numItemCol*numItemCol的矩阵盛放小方格Item2048
@@ -69,7 +66,7 @@ public class ItemLayout extends RelativeLayout {
                 Item2048 item2048 = new Item2048(getContext());
                 item2048s[i] = item2048;
                 item2048.setId(i+1); //每个小方格设置id
-                RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ItemWidth,ItemWidth);
+                @SuppressLint("DrawAllocation") RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ItemWidth,ItemWidth);
                 if((i+1)%numItemCol != 0){ //不是最后一列，设置右边距
                     layoutParams.rightMargin = mMargin;
                 }
@@ -88,6 +85,7 @@ public class ItemLayout extends RelativeLayout {
         setMeasuredDimension(length,length);//修改布局空间
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent motionEvent){
         gestureDetector.onTouchEvent(motionEvent);
@@ -153,7 +151,7 @@ public class ItemLayout extends RelativeLayout {
         //游戏数字“移动”逻辑
         private void action(ACTION action) {
             for(int i = 0 ; i < numItemCol ;i++){
-                ArrayList<Item2048> itemList = new ArrayList<Item2048>();//上下移动，按列存储，左右移动，按行存储
+                ArrayList<Item2048> itemList = new ArrayList<>();//上下移动，按列存储，左右移动，按行存储
                 for(int j = 0 ; j < numItemCol ; j++){
                     int index = getIndexByAction(action,i,j);
                     Item2048 item = item2048s[index];
@@ -224,17 +222,16 @@ public class ItemLayout extends RelativeLayout {
 
     //产生随机数字
     public void generateNum(){
+        myItem2048Listener.onTopScore(myScore);
         if(checkOver()){ // checkOver() 检查游戏是否结束
             if(myItem2048Listener != null){
-                myItem2048Listener.onTopScore(myScore);
                 myItem2048Listener.onGameOver();
             }
             return;
         }
         if(isSuccess()){// checkOver() 检查游戏是否成功
             if(myItem2048Listener != null){
-                myItem2048Listener.onTopScore(myScore);
-                myItem2048Listener.onGameSuccessfull();
+                myItem2048Listener.onGameSuccessful();
             }
             return;
         }
@@ -292,8 +289,8 @@ public class ItemLayout extends RelativeLayout {
     //判断游戏是否成功
     public boolean isSuccess(){
         boolean flagS = false;
-        for(int i = 0 ; i < item2048s.length ; i++){
-            if(item2048s[i].getNumber() == 2048){
+        for (Item2048 item2048 : item2048s) {
+            if (item2048.getNumber() == 2048) {
                 flagS = true;
                 break;
             }
@@ -302,8 +299,8 @@ public class ItemLayout extends RelativeLayout {
     }
 
     private boolean isFull() {
-        for(int i = 0 ; i < item2048s.length ; i++){
-            if(item2048s[i].getNumber() == 0){
+        for (Item2048 item2048 : item2048s) {
+            if (item2048.getNumber() == 0) {
                 return false;
             }
         }
@@ -313,7 +310,7 @@ public class ItemLayout extends RelativeLayout {
     public interface My2048Listener{
      void onScoreChange(int score);
      void onGameOver();
-     void onGameSuccessfull();
+     void onGameSuccessful();
      void onTopScore(int score);
     }
     public void setMy2048Listener(My2048Listener my2048Listener){

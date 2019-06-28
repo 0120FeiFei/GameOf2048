@@ -13,7 +13,7 @@ public class EntryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entry);
         //开始2048游戏
-        Button frist_game_btn = (Button)findViewById(R.id.frist_game_btn01);
+        Button frist_game_btn = findViewById(R.id.frist_game_btn01);
         frist_game_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -22,7 +22,7 @@ public class EntryActivity extends AppCompatActivity {
             }
         });
         //开始24点
-        Button second_game_btn = (Button)findViewById(R.id.second_game_btn02);
+        Button second_game_btn = findViewById(R.id.second_game_btn02);
         second_game_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

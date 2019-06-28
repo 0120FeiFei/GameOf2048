@@ -14,24 +14,22 @@ public class GameFristActivity extends AppCompatActivity implements ItemLayout.M
 
     private ItemLayout itemLayout;
     private TextView myScore;
-    private ImageButton imageButtonRefresh;
-    private ImageButton imageButtonQuestion;
     private Item2048[] item2048s ;
-    private TextView topScoreview;
+    protected TextView topScoreView;
     private TopScore topScore;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_frist);
         topScore = new TopScore(this);
-        myScore = (TextView) findViewById(R.id.total_score_title);
-        topScoreview = (TextView)findViewById(R.id.top_score);
-        topScoreview.setText("历史记录："+topScore.getTopScore()); //数据存储,闪退，，，忘记实例化，
-        itemLayout = (ItemLayout) findViewById(R.id.item_layout);
+        myScore = findViewById(R.id.total_score_title);
+        topScoreView = findViewById(R.id.top_score);
+        topScoreView.setText("历史记录："+topScore.getTopScore()); //数据存储,闪退，，，忘记实例化，
+        itemLayout = findViewById(R.id.item_layout);
         itemLayout.setMy2048Listener(this);
 
-        imageButtonRefresh = (ImageButton) findViewById(R.id.refresh);
-        imageButtonQuestion = (ImageButton)findViewById(R.id.question);
+        ImageButton imageButtonRefresh = findViewById(R.id.refresh);
+        ImageButton imageButtonQuestion = findViewById(R.id.question);
         imageButtonRefresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -40,9 +38,12 @@ public class GameFristActivity extends AppCompatActivity implements ItemLayout.M
                     item2048s[i].setNumber(0);
                 }
                 Random random = new Random();
-                int randonIndex = random.nextInt(16);
-                Item2048 item2048 = item2048s[randonIndex];
+                int randomIndex = random.nextInt(16);
+                Item2048 item2048 = item2048s[randomIndex];
                 item2048.setNumber(Math.random()>0.5?4:2);
+                itemLayout.setMyScore(0);
+                int score = itemLayout.getMyScore();
+                onScoreChange(score);
             }
         });
 
@@ -61,7 +62,6 @@ public class GameFristActivity extends AppCompatActivity implements ItemLayout.M
                   }
               });
               dialog.show();
-
             }
         });
     }
@@ -82,7 +82,7 @@ public class GameFristActivity extends AppCompatActivity implements ItemLayout.M
                     }
                 }).show();
     }
-    public void onGameSuccessfull(){
+    public void onGameSuccessful(){
         new AlertDialog.Builder(this).setTitle("游戏成功").setMessage(myScore.getText()).
                 setPositiveButton("退出", new DialogInterface.OnClickListener() {
                     @Override

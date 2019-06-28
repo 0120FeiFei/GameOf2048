@@ -5,18 +5,17 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
 /**
- * 利用sharedpreferences进行数据存储，原理采用键值对存储
+ * 利用SharedPreferences进行数据存储，原理采用键值对存储
  * Created by Administrator on 2019/6/26.
  */
 
-public class TopScore {
+class TopScore {
     private SharedPreferences sp ;
-    public TopScore(Context context){
+    TopScore(Context context){
         sp = context.getSharedPreferences("TopScore",Context.MODE_PRIVATE);
     }
     int getTopScore(){
-        int topScore = sp.getInt("TopScore",0);//getIn(String key,int defValue)
-        return topScore;
+        return sp.getInt("TopScore",0);
     }
     void setTopScore(int score){
         Editor editor = sp.edit();
